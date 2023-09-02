@@ -2,11 +2,11 @@ const counterValue = document.getElementById("num");
 const incrementEl = document.getElementById("increment");
 const decrementEl = document.getElementById("decrement");
 
-const initialState = {
+const initialValue = {
   value: 0,
 };
 
-const counterReducer = (state = initialState, action) => {
+const counterReducer = (state = initialValue, action) => {
   if (action.type === "increment") {
     return {
       ...state,
@@ -17,15 +17,16 @@ const counterReducer = (state = initialState, action) => {
       ...state,
       value: state.value - 1,
     };
+  } else {
+    return state;
   }
-  return state;
 };
 
 const store = Redux.createStore(counterReducer);
 
 const render = () => {
   const value = store.getState();
-  counterValue.innerText = value.value;
+  counterValue.innerText = value.value.toString();
 };
 
 render();
