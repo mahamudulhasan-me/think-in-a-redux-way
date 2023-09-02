@@ -39,7 +39,17 @@ const counterReducer = (state = initialValue, action) => {
       ...state,
       value: state.value - action.payload,
     };
-  } else {
+  }
+  //    else if ((action.type = "ITEST")) {
+  //     return {
+  //       ...state,
+  //       properties: {
+  //         ...state.properties,
+  //         b: state.properties.b + 1,
+  //       },
+  //     };
+  //   }
+  else {
     return state;
   }
 };
