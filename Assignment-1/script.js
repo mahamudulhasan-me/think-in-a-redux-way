@@ -52,16 +52,6 @@ const scoreReducer = (state = initialState, action) => {
 // Create Store
 const store = Redux.createStore(scoreReducer);
 
-// Button Click Event Listener
-
-addAnotherMatchBtn.addEventListener("click", () => {
-  store.dispatch(addMatch());
-});
-
-const deleteMatchHandler = (id) => {
-  store.dispatch(deleteMatch(id));
-};
-
 const matchHtml = (match) => {
   return `
       <div class="match">
@@ -94,6 +84,20 @@ const matchHtml = (match) => {
       </div>
       </div>
       `;
+};
+
+// Button Click Event Listener
+addAnotherMatchBtn.addEventListener("click", () => {
+  store.dispatch(addMatch());
+});
+
+const deleteMatchHandler = (id) => {
+  store.dispatch(deleteMatch(id));
+};
+
+const incrementHandler = (id, formElm) => {
+  console.log({ id, formElm });
+  const value = Number(formElm.querySelector("."));
 };
 
 const render = () => {
