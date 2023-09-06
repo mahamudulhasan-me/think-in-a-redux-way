@@ -21,6 +21,7 @@ const idGenerator = (arr) => {
 // Actions identifiers
 const ADDANOTHERMATCH = "score/addAnotherMatch";
 const DELETEMATCH = "score/deleteMatch";
+const INCREMENT = "score/increment";
 
 //action creator
 const addMatch = () => {
@@ -36,9 +37,27 @@ const deleteMatch = (payload) => {
   };
 };
 
+const incrementScore = (payload) => {
+  return {
+    type: INCREMENT,
+    payload,
+  };
+};
 // reducer function
 const scoreReducer = (state = initialState, action) => {
   switch (action.type) {
+    case INCREMENT:
+      let incrementState = state.map((match) => {
+        if (match.id === action.payload.id) {
+          return {
+            ...match,
+            score: match.score + Number(action.payload.value),
+          };
+        } else {
+          return match;
+        }
+      });
+      return incrementState;
     case ADDANOTHERMATCH:
       const newId = idGenerator(state);
       return [...state, { id: newId, score: 0 }];
@@ -96,8 +115,9 @@ const deleteMatchHandler = (id) => {
 };
 
 const incrementHandler = (id, formElm) => {
-  console.log({ id, formElm });
-  const value = Number(formElm.querySelector("."));
+  const value = Number(formElm.querySelector(".lws-increment").value);
+  store.dispatch(incrementScore({ id, value }));
+  formElm.querySelector(".lws-increment").innerHTML = "";
 };
 
 const render = () => {
