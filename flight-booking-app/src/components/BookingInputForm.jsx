@@ -4,8 +4,8 @@ import vector1 from "../assets/img/icons/Vector (1).svg";
 import vector3 from "../assets/img/icons/Vector (3).svg";
 import { booking } from "../redux/flightBooking/actionTypes";
 function BookingInputForm() {
-  const state = useSelector((state) => state);
-  console.log(state);
+  const state = useSelector((state) => state?.booking);
+
   const dispatch = useDispatch();
   const handleBooking = (e) => {
     e.preventDefault();
@@ -129,7 +129,12 @@ function BookingInputForm() {
             </div>
           </div>
 
-          <button className="addCity" type="submit" id="lws-addCity">
+          <button
+            disabled={state?.length === 3}
+            className="addCity"
+            type="submit"
+            id="lws-addCity"
+          >
             <svg
               width="15px"
               height="15px"
