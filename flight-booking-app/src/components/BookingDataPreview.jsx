@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import { deleteBookingInfo } from "../redux/flightBooking/actionTypes";
+import { deleteBookingInfo } from "../redux/flightBooking/action";
 
 function BookingDataPreview() {
   const state = useSelector((state) => state?.booking);
   const dispatch = useDispatch();
+
   const handleDelete = (id) => {
     dispatch(deleteBookingInfo(id));
   };
-  console.log(state);
+
   return (
     <div className="table-container">
       <table className="booking-table">

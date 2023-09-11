@@ -1,2 +1,15 @@
-export const BOOKING = "flight/booking";
-export const DELETEBOOKINGINFO = "flight/deleteBookingInfo";
+import { BOOKING, DELETEBOOKINGINFO } from "./actionTypes";
+
+export const booking = (payload) => {
+  return {
+    type: BOOKING,
+    payload,
+  };
+};
+
+export const deleteBookingInfo = (id) => {
+  return {
+    type: DELETEBOOKINGINFO,
+    id,
+  };
+};

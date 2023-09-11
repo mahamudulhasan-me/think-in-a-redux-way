@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import frame from "../assets/img/icons/Frame.svg";
 import vector1 from "../assets/img/icons/Vector (1).svg";
 import vector3 from "../assets/img/icons/Vector (3).svg";
-import { booking } from "../redux/flightBooking/actionTypes";
+import { booking } from "../redux/flightBooking/action";
+
 function BookingInputForm() {
   const state = useSelector((state) => state?.booking);
 
@@ -25,6 +26,7 @@ function BookingInputForm() {
     };
 
     dispatch(booking(bookingInfo));
+    form.reset();
   };
 
   return (
