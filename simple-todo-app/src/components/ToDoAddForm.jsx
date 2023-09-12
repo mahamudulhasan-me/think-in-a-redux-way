@@ -1,5 +1,6 @@
 import doubleThik from "../assets/images/double-tick.png";
 import notes from "../assets/images/notes.png";
+import plus from "../assets/images/plus.png";
 const ToDoAddForm = () => {
   return (
     <div>
@@ -12,7 +13,8 @@ const ToDoAddForm = () => {
         />
         <button
           type="submit"
-          className="appearance-none w-8 h-8 bg-[url('./images/plus.png')] bg-no-repeat bg-contain"
+          style={{ backgroundImage: `url(${plus})` }}
+          className={`appearance-none w-8 h-8  bg-no-repeat bg-contain`}
         ></button>
       </form>
 
