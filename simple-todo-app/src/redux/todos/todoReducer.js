@@ -8,15 +8,19 @@ import {
 } from "./actionType";
 import initialState from "./initialState";
 
-const nextTodoId = (todo) => {
-  const maxId = todo.reduce((maxId, todo) => Math.max(maxId, todo.id) - 1);
+const nextTodoId = (todoArr) => {
+  const maxId = todoArr.reduce((maxId, todo) => Math.max(maxId, todo.id) - 1);
+  console.log(maxId);
   return maxId + 1;
 };
 
 const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADDED:
-      return [...state, { id: nextTodoId(state) }];
+      return [
+        ...state,
+        { id: nextTodoId(state), todoBody: action.payload, completed: false },
+      ];
 
     case TOGGLED:
       return state.map((todo) => {

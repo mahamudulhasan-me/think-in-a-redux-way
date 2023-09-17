@@ -20,11 +20,9 @@ const filterReducer = (state = filterInitialState, action) => {
         case "removed":
           return {
             ...state,
-            colors: [
-              ...state.colors.filter(
-                (existingColor) => existingColor !== color
-              ),
-            ],
+            colors: state.colors.filter(
+              (existingColor) => existingColor !== color
+            ),
           };
 
         default:
