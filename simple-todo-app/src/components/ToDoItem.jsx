@@ -1,11 +1,18 @@
 import { useDispatch } from "react-redux";
 import cancel from "../assets/images/cancel.png";
-import { toggled } from "../redux/todos/action";
+import { colorSelected, deleted, toggled } from "../redux/todos/action";
 const ToDoItem = ({ todo }) => {
-  const { id, todoBody, completed } = todo;
+  const { id, todoBody, completed, color } = todo;
   const dispatch = useDispatch();
-  const makeCompleted = (e) => {
-    dispatch(toggled(todo.id));
+  const makeCompleted = (id) => {
+    dispatch(toggled(id));
+  };
+  const selectColor = (id, color) => {
+    dispatch(colorSelected(id, color));
+  };
+
+  const handleDelete = (id) => {
+    dispatch(deleted(id));
   };
   return (
     <>
@@ -17,7 +24,7 @@ const ToDoItem = ({ todo }) => {
           }`}
         >
           <input
-            onChange={makeCompleted}
+            onChange={() => makeCompleted(id)}
             type="checkbox"
             checked={completed}
             className="opacity-0 absolute rounded-full"
@@ -34,13 +41,29 @@ const ToDoItem = ({ todo }) => {
 
         <div className="select-none flex-1">{todoBody}</div>
 
-        <div className="flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-green-500 hover:bg-green-500 bg-green-500"></div>
+        <div
+          onClick={() => selectColor(id, "green")}
+          className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-green-500 hover:bg-green-500 ${
+            color === "green" && "bg-green-500"
+          }`}
+        ></div>
 
-        <div className="flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-yellow-500 hover:bg-yellow-500"></div>
+        <div
+          onClick={() => selectColor(id, "yellow")}
+          className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-yellow-500 hover:bg-yellow-500 ${
+            color === "yellow" && "bg-yellow-500"
+          }`}
+        ></div>
 
-        <div className="flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-red-500 hover:bg-red-500"></div>
+        <div
+          onClick={() => selectColor(id, "red")}
+          className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-red-500 hover:bg-red-500 ${
+            color === "red" && "bg-red-500"
+          }`}
+        ></div>
 
         <img
+          onClick={() => handleDelete(id)}
           src={cancel}
           className="flex-shrink-0 w-4 h-4 ml-2 cursor-pointer"
           alt="Cancel"

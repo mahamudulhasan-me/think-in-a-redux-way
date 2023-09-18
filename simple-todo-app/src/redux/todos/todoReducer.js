@@ -48,7 +48,7 @@ const todoReducer = (state = initialState, action) => {
     }
 
     case DELETED:
-      return state.map((todo) => todo.id !== action.payload);
+      return state.filter((todo) => todo.id !== action.payload);
 
     case ALLCOMPLETED:
       return state.map((todo) => ({
