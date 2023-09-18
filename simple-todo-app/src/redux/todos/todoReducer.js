@@ -8,12 +8,10 @@ import {
 } from "./actionType";
 import initialState from "./initialState";
 
-const nextTodoId = (todoArr) => {
-  const maxId = todoArr.reduce((maxId, todo) => Math.max(maxId, todo.id) - 1);
-  console.log(maxId);
+const nextTodoId = (todos) => {
+  const maxId = todos.reduce((maxId, todo) => Math.max(todo.id, maxId), -1);
   return maxId + 1;
 };
-
 const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADDED:

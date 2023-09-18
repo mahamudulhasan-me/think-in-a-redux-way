@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import doubleThik from "../assets/images/double-tick.png";
 import notes from "../assets/images/notes.png";
 import plus from "../assets/images/plus.png";
-import { added } from "../redux/todos/action";
+import { added, allCompleted, clearCompleted } from "../redux/todos/action";
 const ToDoAddForm = () => {
   const dispatch = useDispatch();
 
@@ -33,11 +33,19 @@ const ToDoAddForm = () => {
       </form>
 
       <ul className="flex justify-between my-4 text-xs text-gray-500">
-        <li className="flex space-x-1 cursor-pointer">
+        <li
+          onClick={() => dispatch(allCompleted())}
+          className="flex space-x-1 cursor-pointer"
+        >
           <img className="w-4 h-4" src={doubleThik} alt="Complete" />
           <span>Complete All Tasks</span>
         </li>
-        <li className="cursor-pointer">Clear completed</li>
+        <li
+          onClick={() => dispatch(clearCompleted())}
+          className="cursor-pointer"
+        >
+          Clear completed
+        </li>
       </ul>
     </div>
   );
