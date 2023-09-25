@@ -1,4 +1,9 @@
-const Redux = require("redux");
+const { createStore, applyMiddleware } = require("redux");
+
+const { applyDelayMethod, fetchAsyncTodos } = require("./middlewares.js");
+const { fetchTodos } = require("./functions.js");
+const thunk = require("redux-thunk");
+
 const initialState = {
   todos: [],
 };
@@ -15,19 +20,24 @@ const todoReducer = (state = initialState, action) => {
           },
         ],
       };
-
+    case "todo/fetchAndAddTodos":
+      return {
+        ...state,
+        todos: [...state.todos, ...action.payload],
+      };
     default:
-      break;
+      return state;
   }
 };
 
-const store = Redux.createStore(todoReducer);
+const store = createStore(todoReducer, applyMiddleware(thunk.default));
 
 store.subscribe(() => {
   console.log(store.getState());
 });
 
-store.dispatch({
-  type: "todo/addTodo",
-  payload: "Learn Redux after dispatch",
-});
+// store.dispatch({
+//   type: "todo/addTodo",
+//   payload: "Learn Redux after dispatch",
+// });
+store.dispatch(fetchTodos);
